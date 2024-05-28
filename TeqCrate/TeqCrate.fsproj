@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <Authors>Nicholas Cowle</Authors>
+    <Product>TeqCrate</Product>
+    <Description>TeqCrate is a type-safe datatype-generic programming library for F#. It offers a type-safe and extensible way to inspect, decompose and create values for various kinds of common F# and .NET types.</Description>
+    <PackageProjectUrl>https://github.com/nickcowle/TeqCrate</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>datatype generic type safe heterogeneous collection collections f# product sum data types equality</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Unreachable.fs" />
+    <Compile Include="Reflection.fsi" />
+    <Compile Include="Reflection.fs" />
+    <Compile Include="TypeParameterCrate.fsi" />
+    <Compile Include="TypeParameterCrate.fs" />
+    <Compile Include="TypeListCrate.fsi" />
+    <Compile Include="TypeListCrate.fs" />
+    <Compile Include="Fields.fsi" />
+    <Compile Include="Fields.fs" />
+    <Compile Include="TypePatterns.fsi" />
+    <Compile Include="TypePatterns.fs" />
+    <Compile Include="Type.fsi" />
+    <Compile Include="Type.fs" />
+    <Compile Include="TeqCrates.fsi" />
+    <Compile Include="TeqCrates.fs" />
+    <Compile Include="Conv.fsi" />
+    <Compile Include="Conv.fs" />
+    <Compile Include="ConvCrates.fsi" />
+    <Compile Include="ConvCrates.fs" />
+    <Compile Include="Patterns.fsi" />
+    <Compile Include="Patterns.fs" />
+    <Compile Include="Tuple.fsi" />
+    <Compile Include="Tuple.fs" />
+    <EmbeddedResource Include="SurfaceBaseline.txt" />
+    <EmbeddedResource Include="version.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.5.0" />
+    <PackageReference Include="HCollections" Version="0.5.3" />
+  </ItemGroup>
+
+</Project>
