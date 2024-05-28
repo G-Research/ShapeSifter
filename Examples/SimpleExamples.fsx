@@ -1,10 +1,10 @@
 // Note: run 'dotnet publish' in the root of this repo to ensure that the dlls referenced in this script are present
 
 #r "netstandard"
-#I @"..\TeqCrate\bin\Debug\netstandard2.0\publish"
+#I @"..\ShapeSifter\bin\Debug\netstandard2.0\publish"
 #r "TypeEquality.dll"
 #r "HCollections.dll"
-#r "TeqCrate.dll"
+#r "ShapeSifter.dll"
 
 open HCollections
 open TeqCrate
