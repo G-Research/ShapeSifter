@@ -1,4 +1,4 @@
-# TeqCrate
+# ShapeSifter
 
 Type-safe datatype-generic programming for F#.
 

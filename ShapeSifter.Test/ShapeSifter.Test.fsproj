@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net481;net8.0</TargetFrameworks>
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TeqCrate\TeqCrate.fsproj" />
+    <ProjectReference Include="..\ShapeSifter\ShapeSifter.fsproj" />
   </ItemGroup>
 
 </Project>
