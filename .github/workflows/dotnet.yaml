@@ -131,11 +131,12 @@ jobs:
       - run: echo "All required checks complete."
 
   # This does not gate release, because external dependencies may be flaky.
-  markdown-link-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+  # Disabled while the repo is private
+  # markdown-link-check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: gaurav-nelson/github-action-markdown-link-check@v1
 
     # nuget-publish:
     #   runs-on: ubuntu-latest
