@@ -1,4 +1,4 @@
-namespace ShapeSifter
+﻿namespace ShapeSifter
 
 open System
 open TypeEquality
@@ -7,6 +7,7 @@ module Patterns =
 
     type 'a TType = | TType of unit
 
+    [<RequiresExplicitTypeArguments>]
     let tType<'a> : 'a TType = TType ()
 
     let (|Bool|_|) (_ : 'a TType) : Teq<'a, bool> option = Teq.tryRefl<'a, bool>
