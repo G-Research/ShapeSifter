@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+
+import subprocess
+
+def check_fantomas():
+    result = subprocess.run(["dotnet", "fantomas", "--check", "."])
+    if result.returncode != 0:
+        raise Exception(f"Formatting incomplete (return code: {result.returncode}). Consider running `dotnet fantomas .`")
+
+
+def main():
+    check_fantomas()
+
+
+if __name__ == "__main__":
+    main()

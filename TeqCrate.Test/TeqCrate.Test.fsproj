@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net481;net8.0</TargetFrameworks>
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Attribute.fs" />
+    <Compile Include="TestType.fs" />
+    <Compile Include="TestPatterns.fs" />
+    <Compile Include="TestRecord.fs" />
+    <Compile Include="TestUnion.fs" />
+    <Compile Include="TestSurface.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ApiSurface" Version="4.0.8" />
+    <PackageReference Include="FsUnit" Version="4.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeqCrate\TeqCrate.fsproj" />
+  </ItemGroup>
+
+</Project>

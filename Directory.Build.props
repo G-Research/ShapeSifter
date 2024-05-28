@@ -1,0 +1,31 @@
+<Project>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" Condition="Exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')))" />
+  <PropertyGroup>
+    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
+    <Tailcalls>true</Tailcalls>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <SourceLinkGitHubHost Include="github.com" ContentUrl="https://raw.githubusercontent.com" />
+  </ItemGroup>
+  <!--
+    SourceLink doesn't support F# deterministic builds out of the box,
+    so tell SourceLink that our source root is going to be remapped.
+  -->
+  <Target Name="MapSourceRoot" BeforeTargets="_GenerateSourceLinkFile" Condition="'$(SourceRootMappedPathsFeatureSupported)' != 'true'">
+    <ItemGroup>
+      <SourceRoot Update="@(SourceRoot)">
+        <MappedPath>Z:\CheckoutRoot\TeqCrate\</MappedPath>
+      </SourceRoot>
+    </ItemGroup>
+  </Target>
+</Project>
