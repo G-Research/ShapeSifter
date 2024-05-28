@@ -25,11 +25,11 @@ module TestExamples =
         let tryListLength (a : 'a) : int option =
             match tType<'a> with
             | List crate ->
-                crate.Apply
-                    { new ListTeqEvaluator<_, _> with
-                        member _.Eval (teq : Teq<'a, 'b list>) =
-                            a |> Teq.castTo teq |> List.length |> Some
-                    }
+                { new ListTeqEvaluator<_, _> with
+                    member _.Eval (teq : Teq<'a, 'b list>) =
+                        a |> Teq.castTo teq |> List.length |> Some
+                }
+                |> crate.Apply
             | _ -> None
 
         tryListLength "hello" |> shouldEqual None
@@ -40,23 +40,22 @@ module TestExamples =
         let tryListSomeCount (a : 'a) : int option =
             match tType<'a> with
             | List crate ->
-                crate.Apply
-                    { new ListTeqEvaluator<_, _> with
-                        member _.Eval (teq1 : Teq<'a, 'b list>) =
-                            match tType<'b> with
-                            | Option crate ->
-                                crate.Apply
-                                    { new OptionTeqEvaluator<_, _> with
-                                        member _.Eval (teq2 : Teq<'b, 'c option>) =
-                                            let teq : Teq<'a, 'c option list> =
-                                                Teq.transitivity teq1 (Teq.Cong.list teq2)
+                { new ListTeqEvaluator<_, _> with
+                    member _.Eval (teq1 : Teq<'a, 'b list>) =
+                        match tType<'b> with
+                        | Option crate ->
+                            { new OptionTeqEvaluator<_, _> with
+                                member _.Eval (teq2 : Teq<'b, 'c option>) =
+                                    let teq : Teq<'a, 'c option list> = Teq.transitivity teq1 (Teq.Cong.list teq2)
 
-                                            let xs : 'c option list = Teq.castTo teq a
+                                    let xs : 'c option list = Teq.castTo teq a
 
-                                            xs |> List.filter Option.isSome |> List.length |> Some
-                                    }
-                            | _ -> None
-                    }
+                                    xs |> List.filter Option.isSome |> List.length |> Some
+                            }
+                            |> crate.Apply
+                        | _ -> None
+                }
+                |> crate.Apply
             | _ -> None
 
         tryListSomeCount [ None ; Some 'a' ; None ; Some 'b' ; Some 'c' ]
@@ -67,11 +66,11 @@ module TestExamples =
         let tryTupleLength (a : 'a) : int option =
             match tType<'a> with
             | Tuple crate ->
-                crate.Apply
-                    { new TupleConvEvaluator<_, _> with
-                        member _.Eval (ts : 'ts TypeList) (conv : Conv<'a, 'ts HList>) =
-                            a |> conv.To |> HList.length |> Some
-                    }
+                { new TupleConvEvaluator<_, _> with
+                    member _.Eval (ts : 'ts TypeList) (conv : Conv<'a, 'ts HList>) =
+                        a |> conv.To |> HList.length |> Some
+                }
+                |> crate.Apply
             | _ -> None
 
         tryTupleLength ("hello", false) |> shouldEqual (Some 2)
@@ -82,21 +81,21 @@ module TestExamples =
         let trySumTupleInts (a : 'a) : int option =
             match tType<'a> with
             | Tuple crate ->
-                crate.Apply
-                    { new TupleConvEvaluator<_, _> with
-                        member _.Eval _ (conv : Conv<'a, 'ts HList>) =
-                            let xs : 'ts HList = a |> conv.To
+                { new TupleConvEvaluator<_, _> with
+                    member _.Eval _ (conv : Conv<'a, 'ts HList>) =
+                        let xs : 'ts HList = a |> conv.To
 
-                            let folder =
-                                { new HListFolder<int> with
-                                    member _.Folder sum (x : 'b) =
-                                        match tType<'b> with
-                                        | Int teq -> sum + (x |> Teq.castTo teq)
-                                        | _ -> sum
-                                }
+                        let folder =
+                            { new HListFolder<int> with
+                                member _.Folder sum (x : 'b) =
+                                    match tType<'b> with
+                                    | Int teq -> sum + (x |> Teq.castTo teq)
+                                    | _ -> sum
+                            }
 
-                            HList.fold folder 0 xs |> Some
-                    }
+                        HList.fold folder 0 xs |> Some
+                }
+                |> crate.Apply
             | _ -> None
 
         trySumTupleInts (5, 5, 5, 5) |> shouldEqual (Some 20)
