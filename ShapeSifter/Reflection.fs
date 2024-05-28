@@ -1,4 +1,4 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns

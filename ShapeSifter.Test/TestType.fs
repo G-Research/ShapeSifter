@@ -1,7 +1,7 @@
-﻿namespace TeqCrate.Test
+﻿namespace ShapeSifter.Test
 
 open System
-open TeqCrate
+open ShapeSifter
 open Xunit
 
 [<RequireQualifiedAccess>]

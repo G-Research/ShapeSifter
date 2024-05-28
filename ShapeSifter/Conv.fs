@@ -1,4 +1,4 @@
-﻿namespace TeqCrate
+namespace ShapeSifter
 
 [<NoComparison>]
 [<NoEquality>]

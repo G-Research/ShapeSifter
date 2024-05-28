@@ -1,7 +1,7 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 open System.Collections.Generic
-open TeqCrate.TypePatterns
+open ShapeSifter.TypePatterns
 open TypeEquality
 
 

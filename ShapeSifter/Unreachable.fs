@@ -1,3 +1,3 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 exception internal Unreachable

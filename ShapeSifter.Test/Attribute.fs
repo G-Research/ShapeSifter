@@ -1,6 +1,6 @@
-namespace TeqCrate.Test
+namespace ShapeSifter.Test
 
-open TeqCrate
+open ShapeSifter
 
 [<RequireQualifiedAccess>]
 module Attribute =

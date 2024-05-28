@@ -1,8 +1,8 @@
-namespace TeqCrate.Test
+namespace ShapeSifter.Test
 
 open HCollections
-open TeqCrate
-open TeqCrate.Patterns
+open ShapeSifter
+open ShapeSifter.Patterns
 open TypeEquality
 open Xunit
 

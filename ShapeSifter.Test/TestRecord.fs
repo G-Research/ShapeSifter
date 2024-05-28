@@ -1,12 +1,12 @@
-namespace TeqCrate.Test
+namespace ShapeSifter.Test
 
 open System
 
 open Xunit
 open FsUnitTyped
 
-open TeqCrate
-open TeqCrate.Patterns
+open ShapeSifter
+open ShapeSifter.Patterns
 
 module TestRecord =
 

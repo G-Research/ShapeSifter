@@ -1,7 +1,7 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 open System
-open TeqCrate.TypePatterns
+open ShapeSifter.TypePatterns
 
 [<RequireQualifiedAccess>]
 module Type =

@@ -1,7 +1,7 @@
-namespace TeqCrate.Test
+namespace ShapeSifter.Test
 
 open ApiSurface
-open TeqCrate
+open ShapeSifter
 open Xunit
 
 module TestSurface =
@@ -20,4 +20,4 @@ module TestSurface =
 
     [<Fact>]
     let ``Ensure version is monotonic`` () =
-        MonotonicVersion.validate assembly "TeqCrate"
+        MonotonicVersion.validate assembly "ShapeSifter"
