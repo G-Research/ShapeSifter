@@ -2,12 +2,13 @@ namespace ShapeSifter.Test
 
 open System
 
-open Xunit
+open NUnit.Framework
 open FsUnitTyped
 
 open ShapeSifter
 open ShapeSifter.Patterns
 
+[<TestFixture>]
 module TestUnion =
 
     [<AttributeUsage(AttributeTargets.Property, Inherited = true)>]
@@ -24,7 +25,7 @@ module TestUnion =
         | [<Bar>] Case3
         | [<Foo ; Bar>] Case4 of int64
 
-    [<Fact>]
+    [<Test>]
     let ``Custom attributes are populated correctly for union cases`` () =
         let data =
             match tType<UnionType> with
@@ -66,7 +67,7 @@ module TestUnion =
         | Field1
         | [<Foo>] Field2
 
-    [<Fact>]
+    [<Test>]
     let ``Can obtain field data for private-implementation unions`` () =
         let data =
             match tType<PrivateFieldUnion> with

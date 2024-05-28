@@ -1,23 +1,24 @@
 namespace ShapeSifter.Test
 
 open HCollections
+open NUnit.Framework
+open FsUnitTyped
 open ShapeSifter
 open ShapeSifter.Patterns
 open TypeEquality
-open Xunit
 
-[<RequireQualifiedAccess>]
+[<TestFixture>]
 module TestPatterns =
 
-    [<Fact>]
+    [<Test>]
     let ``Teq active pattern distinguishes int from string`` () =
 
         let t1 = tType<int>
         let t2 = tType<string>
 
         match t1 with
-        | Teq t2 teq -> Assert.True false
-        | _ -> Assert.True true
+        | Teq t2 teq -> failwith "Expected int != string"
+        | _ -> ()
 
     let tryGetArrayLength (arr : 'a) : int option =
         match tType<'a> with
@@ -28,11 +29,11 @@ module TestPatterns =
                 }
         | _ -> None
 
-    [<Fact>]
+    [<Test>]
     let ``Array active pattern recognises an array`` () =
-
         let arr = [| "foo" ; "bar" |]
-        Assert.Equal (Some 2, tryGetArrayLength arr)
+        tryGetArrayLength arr
+        |> shouldEqual (Some 2)
 
     let tryGetListLength (xs : 'a) : int option =
         match tType<'a> with
@@ -44,11 +45,11 @@ module TestPatterns =
                 }
         | _ -> None
 
-    [<Fact>]
+    [<Test>]
     let ``List active pattern recognises a list`` () =
-
         let xs = [ 1..10 ]
-        Assert.Equal (Some 10, tryGetListLength xs)
+        tryGetListLength xs
+        |> shouldEqual (Some 10)
 
     let tryGetMapCount (map : 'a) : int option =
         match tType<'a> with
@@ -60,20 +61,21 @@ module TestPatterns =
                 }
         | _ -> None
 
-    [<Fact>]
+    [<Test>]
     let ``Map active pattern recognises a map`` () =
-
         let map = Map.empty |> Map.add "foo" 3 |> Map.add "bar" 12
-        Assert.Equal (Some 2, tryGetMapCount map)
+        tryGetMapCount map
+        |> shouldEqual (Some 2)
 
-    [<Fact>]
+    [<Test>]
     let ``Tuple active pattern recognises a tuple`` () =
 
         let tuple = 5, "hello", false, 8, 2
         let sumOfInts = Tuple.tryFoldTuple (HListFolder.makeElementFolder (+)) 0 tuple
-        Assert.Equal (Some 15, sumOfInts)
+        sumOfInts
+        |> shouldEqual (Some 15)
 
-    [<Fact>]
+    [<Test>]
     let ``Fun active pattern recognises a function`` () =
 
         match tType<int -> string> with
@@ -84,12 +86,12 @@ module TestPatterns =
                         member __.Eval (teq : Teq<int -> string, 'a -> 'b>) = typeof<'a>, typeof<'b>
                     }
 
-            Assert.Equal (typeof<int>, dom)
-            Assert.Equal (typeof<string>, ran)
+            dom |> shouldEqual typeof<int>
+            ran |> shouldEqual typeof<string>
 
-        | _ -> Assert.True false
+        | _ -> failwith "expected a function type"
 
-    [<Fact>]
+    [<Test>]
     let ``Pair active pattern recognises a pair`` () =
 
         match tType<int * string> with
@@ -100,22 +102,22 @@ module TestPatterns =
                         member __.Eval (teq : Teq<int * string, 'a * 'b>) = typeof<'a>, typeof<'b>
                     }
 
-            Assert.Equal (typeof<int>, t1)
-            Assert.Equal (typeof<string>, t2)
+            t1 |> shouldEqual typeof<int>
+            t2 |> shouldEqual typeof<string>
 
-        | _ -> Assert.True false
+        | _ -> failwith "expected a pair type"
 
-    [<Fact>]
+    [<Test>]
     let ``Unit active pattern recognises a unit`` () =
         // This test is useful because there are certain aspects of F# which behave oddly
         // in the presence of unit. (It turns out that units are just fine here.)
 
         match tType<unit> with
-        | Unit teq -> Assert.True (Teq.castFrom teq () = ())
+        | Unit teq -> Teq.castFrom teq () |> shouldEqual ()
 
-        | _ -> Assert.True false
+        | _ -> failwith "expected a unit type"
 
-    [<Fact>]
+    [<Test>]
     let ``Triple active pattern recognises a triple`` () =
 
         match tType<int * string * bool> with
@@ -127,11 +129,11 @@ module TestPatterns =
                             typeof<'a>, typeof<'b>, typeof<'c>
                     }
 
-            Assert.Equal (typeof<int>, t1)
-            Assert.Equal (typeof<string>, t2)
-            Assert.Equal (typeof<bool>, t3)
+            t1 |> shouldEqual typeof<int>
+            t2 |> shouldEqual typeof<string>
+            t3 |> shouldEqual typeof<bool>
 
-        | _ -> Assert.True false
+        | _ -> failwith "expected a triple"
 
     type TestRecord =
         {
@@ -165,7 +167,7 @@ module TestPatterns =
             |> Some
         | _ -> None
 
-    [<Fact>]
+    [<Test>]
     let ``Record active pattern recognises a record`` () =
 
         let r =
@@ -180,7 +182,7 @@ module TestPatterns =
 
         let expected = Some [ "Baz", "world" ; "Foo", "hello" ]
 
-        Assert.Equal (expected, pairs)
+        pairs |> shouldEqual expected
 
     type TestUnion =
         | Foo
@@ -188,7 +190,7 @@ module TestPatterns =
         | Baz of string * float
         | Quux of string
 
-    [<Fact>]
+    [<Test>]
     let ``Union active pattern recognises a union`` () =
 
         let testValue = Bar (1234, "test", true)
@@ -202,7 +204,7 @@ module TestPatterns =
 
                             let expectedNames = [ "Foo" ; "Bar" ; "Baz" ; "Quux" ]
                             let actualNames = names |> List.map TypeField.name
-                            Assert.Equal<string list> (expectedNames, actualNames)
+                            actualNames |> shouldEqual expectedNames
 
                             let expectedUnionType =
                                 tType<(unit -> (int * string * bool) -> (string * float) -> string -> unit) HUnion>
@@ -212,20 +214,20 @@ module TestPatterns =
                                 let converted = testValue |> conv.To |> Teq.castTo teq
 
                                 match HUnion.split converted with
-                                | Choice1Of2 v -> false
+                                | Choice1Of2 v -> failwith "expected Choice2Of2"
                                 | Choice2Of2 union ->
                                     match HUnion.split union with
                                     | Choice1Of2 (i : int, s : string, b : bool) ->
                                         let convertedBack = converted |> Teq.castFrom teq |> conv.From
                                         true
-                                    | Choice2Of2 _ -> false
-                            | _ -> false
+                                    | Choice2Of2 _ -> failwith "expected Choice1Of2"
+                            | _ -> failwith "expected Teq"
                     }
-            | _ -> false
+            | _ -> failwith "expected Union"
 
-        Assert.True result
+        result |> shouldEqual true
 
-    [<Fact>]
+    [<Test>]
     let ``SumOfProducts active pattern recognises a union`` () =
 
         let testValue = Bar (1234, "test", true)
@@ -238,7 +240,7 @@ module TestPatterns =
                         member __.Eval names ts (conv : Conv<TestUnion, 'a SumOfProducts>) =
 
                             let expectedNames = [ "Foo" ; "Bar" ; "Baz" ; "Quux" ]
-                            Assert.Equal<string list> (expectedNames, names)
+                            names |> shouldEqual expectedNames
 
                             let expectedUnionType =
                                 tType<
@@ -254,18 +256,18 @@ module TestPatterns =
                                 let converted = testValue |> conv.To |> Teq.castTo teq
 
                                 match SumOfProducts.split converted with
-                                | Choice1Of2 v -> false
+                                | Choice1Of2 v -> failwith "expected Choice2Of2"
                                 | Choice2Of2 sop ->
                                     match SumOfProducts.split sop with
                                     | Choice1Of2 (xs : (int -> string -> bool -> unit) HList) ->
                                         let convertedBack = converted |> Teq.castFrom teq |> conv.From
                                         true
-                                    | Choice2Of2 _ -> false
-                            | _ -> false
+                                    | Choice2Of2 _ -> failwith "expected Choice1Of2"
+                            | _ -> failwith "expected a Teq"
                     }
-            | _ -> false
+            | _ -> failwith "expected a SumOfProducts"
 
-        Assert.True result
+        result |> shouldEqual true
 
     type private TestPrivateRecord =
         {
@@ -274,7 +276,7 @@ module TestPatterns =
             PrivateBaz : string
         }
 
-    [<Fact>]
+    [<Test>]
     let ``Record active pattern recognises a private record`` () =
 
         let r =
@@ -289,7 +291,7 @@ module TestPatterns =
 
         let expected = Some [ "PrivateBaz", "world" ; "PrivateFoo", "hello" ]
 
-        Assert.Equal (expected, pairs)
+        pairs |> shouldEqual expected
 
         let result =
             match tType<TestPrivateRecord> with
@@ -302,13 +304,13 @@ module TestPatterns =
 
                             let actualNames = names |> List.map TypeField.name
 
-                            Assert.Equal<string list> (expectedNames, actualNames)
+                            actualNames |> shouldEqual expectedNames
 
                             TypeList.toTypes ts = [ typeof<string> ; typeof<int> ; typeof<string> ]
                     }
-            | _ -> false
+            | _ -> failwith "expected a record"
 
-        Assert.True result
+        result |> shouldEqual true
 
     type TestInternallyPrivateRecord =
         private
@@ -318,7 +320,7 @@ module TestPatterns =
                 InternallyPrivateBaz : string
             }
 
-    [<Fact>]
+    [<Test>]
     let ``Record active pattern recognises a public record whose fields are private`` () =
 
         let r =
@@ -334,7 +336,7 @@ module TestPatterns =
         let expected =
             Some [ "InternallyPrivateBaz", "world" ; "InternallyPrivateFoo", "hello" ]
 
-        Assert.Equal (expected, pairs)
+        pairs |> shouldEqual expected
 
         let result =
             match tType<TestInternallyPrivateRecord> with
@@ -348,10 +350,10 @@ module TestPatterns =
 
                             let actualNames = names |> List.map TypeField.name
 
-                            Assert.Equal<string list> (expectedNames, actualNames)
+                            actualNames |> shouldEqual expectedNames
 
                             TypeList.toTypes ts = [ typeof<string> ; typeof<int> ; typeof<string> ]
                     }
-            | _ -> false
+            | _ -> failwith "expected a record"
 
-        Assert.True result
+        result |> shouldEqual true

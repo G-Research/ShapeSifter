@@ -1,4 +1,4 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 /// The Conv type (short for converter) is essentially a bi-directional map between two types.
 /// For any pair of types 'a and 'b, a Conv<'a, 'b> is a pair of functions

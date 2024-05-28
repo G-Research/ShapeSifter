@@ -2,12 +2,13 @@ namespace ShapeSifter.Test
 
 open System
 
-open Xunit
 open FsUnitTyped
 
+open NUnit.Framework
 open ShapeSifter
 open ShapeSifter.Patterns
 
+[<TestFixture>]
 module TestRecord =
 
     [<AttributeUsage(AttributeTargets.Property, Inherited = false)>]
@@ -29,7 +30,7 @@ module TestRecord =
             Field4 : int64
         }
 
-    [<Fact>]
+    [<Test>]
     let ``Custom attributes are populated correctly for record fields`` () =
         let data =
             match tType<RecordType> with
@@ -77,7 +78,7 @@ module TestRecord =
                 Field2 : string
             }
 
-    [<Fact>]
+    [<Test>]
     let ``Can obtain field data for private-implementation records`` () =
         let data =
             match tType<PrivateFieldRecord> with

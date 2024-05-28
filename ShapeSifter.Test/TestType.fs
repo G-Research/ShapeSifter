@@ -1,10 +1,11 @@
 ﻿namespace ShapeSifter.Test
 
 open System
+open NUnit.Framework
+open FsUnitTyped
 open ShapeSifter
-open Xunit
 
-[<RequireQualifiedAccess>]
+[<TestFixture>]
 module TestType =
 
     let testCases =
@@ -24,6 +25,6 @@ module TestType =
         ]
         |> List.map (fun (t, expected) -> [| box t ; box expected |])
 
-    [<Theory>]
-    [<MemberData("testCases")>]
-    let ``Test print`` (t : Type, expected : string) : unit = Assert.Equal (expected, Type.print t)
+    [<Test>]
+    [<TestCaseSource (nameof testCases)>]
+    let ``Test print`` (t : Type, expected : string) : unit = Type.print t |> shouldEqual expected

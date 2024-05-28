@@ -1,4 +1,4 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 open System.Collections.Generic
 open TypeEquality

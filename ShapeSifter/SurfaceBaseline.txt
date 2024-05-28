@@ -1,181 +1,181 @@
-TeqCrate.ArrayTeqCrate inherit obj
-TeqCrate.ArrayTeqCrate.make [static method]: unit -> 'a [] TeqCrate.ArrayTeqCrate
-TeqCrate.ArrayTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.ArrayTeqCrate option
-TeqCrate.ArrayTeqCrate`1 - interface with 1 member(s)
-TeqCrate.ArrayTeqCrate`1.Apply [method]: TeqCrate.ArrayTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.ArrayTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.ArrayTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b []> -> 'ret
-TeqCrate.Conv inherit obj
-TeqCrate.Conv.compose [static method]: TeqCrate.Conv<'a, 'b> -> TeqCrate.Conv<'b, 'c> -> TeqCrate.Conv<'a, 'c>
-TeqCrate.Conv.make [static method]: ('a -> 'b) -> ('b -> 'a) -> TeqCrate.Conv<'a, 'b>
-TeqCrate.Conv`2 inherit obj
-TeqCrate.Conv`2..ctor [constructor]: ('a -> 'b, 'b -> 'a)
-TeqCrate.Conv`2.From [property]: [read-only] 'b -> 'a
-TeqCrate.Conv`2.get_From [method]: unit -> ('b -> 'a)
-TeqCrate.Conv`2.get_To [method]: unit -> ('a -> 'b)
-TeqCrate.Conv`2.To [property]: [read-only] 'a -> 'b
-TeqCrate.DictionaryTeqCrate inherit obj
-TeqCrate.DictionaryTeqCrate.make [static method]: unit -> System.Collections.Generic.Dictionary<'k, 'v> TeqCrate.DictionaryTeqCrate
-TeqCrate.DictionaryTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.DictionaryTeqCrate option
-TeqCrate.DictionaryTeqCrate`1 - interface with 1 member(s)
-TeqCrate.DictionaryTeqCrate`1.Apply [method]: TeqCrate.DictionaryTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.DictionaryTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.DictionaryTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, System.Collections.Generic.Dictionary<'k, 'v>> -> 'ret
-TeqCrate.FunTeqCrate inherit obj
-TeqCrate.FunTeqCrate.make [static method]: unit -> ('a -> 'b) TeqCrate.FunTeqCrate
-TeqCrate.FunTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.FunTeqCrate option
-TeqCrate.FunTeqCrate`1 - interface with 1 member(s)
-TeqCrate.FunTeqCrate`1.Apply [method]: TeqCrate.FunTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.FunTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.FunTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b -> 'c> -> 'ret
-TeqCrate.ListTeqCrate inherit obj
-TeqCrate.ListTeqCrate.make [static method]: unit -> 'a list TeqCrate.ListTeqCrate
-TeqCrate.ListTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.ListTeqCrate option
-TeqCrate.ListTeqCrate`1 - interface with 1 member(s)
-TeqCrate.ListTeqCrate`1.Apply [method]: TeqCrate.ListTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.ListTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.ListTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b list> -> 'ret
-TeqCrate.MapTeqCrate inherit obj
-TeqCrate.MapTeqCrate.make [static method]: unit -> Map<'k, 'v> TeqCrate.MapTeqCrate
-TeqCrate.MapTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.MapTeqCrate option
-TeqCrate.MapTeqCrate`1 - interface with 1 member(s)
-TeqCrate.MapTeqCrate`1.Apply [method]: TeqCrate.MapTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.MapTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.MapTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, Map<'k, 'v>> -> 'ret
-TeqCrate.OptionTeqCrate inherit obj
-TeqCrate.OptionTeqCrate.make [static method]: unit -> 'a option TeqCrate.OptionTeqCrate
-TeqCrate.OptionTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.OptionTeqCrate option
-TeqCrate.OptionTeqCrate`1 - interface with 1 member(s)
-TeqCrate.OptionTeqCrate`1.Apply [method]: TeqCrate.OptionTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.OptionTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.OptionTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b option> -> 'ret
-TeqCrate.PairTeqCrate inherit obj
-TeqCrate.PairTeqCrate.make [static method]: unit -> ('a * 'b) TeqCrate.PairTeqCrate
-TeqCrate.PairTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.PairTeqCrate option
-TeqCrate.PairTeqCrate`1 - interface with 1 member(s)
-TeqCrate.PairTeqCrate`1.Apply [method]: TeqCrate.PairTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.PairTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.PairTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, ('b * 'c)> -> 'ret
-TeqCrate.Patterns inherit obj
-TeqCrate.Patterns+TType`1 inherit obj, implements 'a TeqCrate.Patterns+TType System.IEquatable, System.Collections.IStructuralEquatable, 'a TeqCrate.Patterns+TType System.IComparable, System.IComparable, System.Collections.IStructuralComparable - union type with 1 cases
-TeqCrate.Patterns+TType`1.get_Item [method]: unit -> unit
-TeqCrate.Patterns+TType`1.get_Tag [method]: unit -> int
-TeqCrate.Patterns+TType`1.Item [property]: [read-only] unit
-TeqCrate.Patterns+TType`1.NewTType [static method]: unit -> 'a TeqCrate.Patterns+TType
-TeqCrate.Patterns+TType`1.Tag [property]: [read-only] int
-TeqCrate.Patterns.tType [static method]: unit -> 'a TeqCrate.Patterns+TType
-TeqCrate.Patterns.|Array|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.ArrayTeqCrate option
-TeqCrate.Patterns.|Bool|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, bool> option
-TeqCrate.Patterns.|DateTime|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, System.DateTime> option
-TeqCrate.Patterns.|Dictionary|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.DictionaryTeqCrate option
-TeqCrate.Patterns.|Float|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, float> option
-TeqCrate.Patterns.|Fun|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.FunTeqCrate option
-TeqCrate.Patterns.|Int64|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, System.Int64> option
-TeqCrate.Patterns.|Int|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, int> option
-TeqCrate.Patterns.|List|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.ListTeqCrate option
-TeqCrate.Patterns.|Map|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.MapTeqCrate option
-TeqCrate.Patterns.|Option|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.OptionTeqCrate option
-TeqCrate.Patterns.|Pair|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.PairTeqCrate option
-TeqCrate.Patterns.|Record|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.RecordConvCrate option
-TeqCrate.Patterns.|ResizeArray|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.ResizeArrayTeqCrate option
-TeqCrate.Patterns.|Seq|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.SeqTeqCrate option
-TeqCrate.Patterns.|Set|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.SetTeqCrate option
-TeqCrate.Patterns.|String|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, string> option
-TeqCrate.Patterns.|SumOfProducts|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.SumOfProductsConvCrate option
-TeqCrate.Patterns.|Teq|_| [static method]: 'b TeqCrate.Patterns+TType -> 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, 'b> option
-TeqCrate.Patterns.|TimeSpan|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, System.TimeSpan> option
-TeqCrate.Patterns.|Triple|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.TripleTeqCrate option
-TeqCrate.Patterns.|Tuple|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.TupleConvCrate option
-TeqCrate.Patterns.|Union|_| [static method]: 'a TeqCrate.Patterns+TType -> 'a TeqCrate.UnionConvCrate option
-TeqCrate.Patterns.|Unit|_| [static method]: 'a TeqCrate.Patterns+TType -> TypeEquality.Teq<'a, unit> option
-TeqCrate.RecordConvCrate inherit obj
-TeqCrate.RecordConvCrate.tryMake [static method]: unit -> 'record TeqCrate.RecordConvCrate option
-TeqCrate.RecordConvCrate`1 - interface with 1 member(s)
-TeqCrate.RecordConvCrate`1.Apply [method]: TeqCrate.RecordConvEvaluator<'record, 'ret> -> 'ret
-TeqCrate.RecordConvEvaluator`2 - interface with 1 member(s)
-TeqCrate.RecordConvEvaluator`2.Eval [method]: System.Reflection.PropertyInfo TeqCrate.TypeField list -> 'ts HCollections.TypeList -> TeqCrate.Conv<'record, 'ts HCollections.HList> -> 'ret
-TeqCrate.Reflection inherit obj
-TeqCrate.Reflection.invokeStaticMethod [static method]: Microsoft.FSharp.Quotations.FSharpExpr -> (System.Type seq -> obj seq -> obj)
-TeqCrate.ResizeArrayTeqCrate inherit obj
-TeqCrate.ResizeArrayTeqCrate.make [static method]: unit -> 'a System.Collections.Generic.List TeqCrate.ResizeArrayTeqCrate
-TeqCrate.ResizeArrayTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.ResizeArrayTeqCrate option
-TeqCrate.ResizeArrayTeqCrate`1 - interface with 1 member(s)
-TeqCrate.ResizeArrayTeqCrate`1.Apply [method]: TeqCrate.ResizeArrayTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.ResizeArrayTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.ResizeArrayTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b System.Collections.Generic.List> -> 'ret
-TeqCrate.SeqTeqCrate inherit obj
-TeqCrate.SeqTeqCrate.make [static method]: unit -> 'a seq TeqCrate.SeqTeqCrate
-TeqCrate.SeqTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.SeqTeqCrate option
-TeqCrate.SeqTeqCrate`1 - interface with 1 member(s)
-TeqCrate.SeqTeqCrate`1.Apply [method]: TeqCrate.SeqTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.SeqTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.SeqTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b seq> -> 'ret
-TeqCrate.SetTeqCrate inherit obj
-TeqCrate.SetTeqCrate.make [static method]: unit -> 'a Microsoft.FSharp.Collections.FSharpSet TeqCrate.SetTeqCrate
-TeqCrate.SetTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.SetTeqCrate option
-TeqCrate.SetTeqCrate`1 - interface with 1 member(s)
-TeqCrate.SetTeqCrate`1.Apply [method]: TeqCrate.SetTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.SetTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.SetTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b Microsoft.FSharp.Collections.FSharpSet> -> 'ret
-TeqCrate.SumOfProductsConvCrate inherit obj
-TeqCrate.SumOfProductsConvCrate.tryMake [static method]: unit -> 'union TeqCrate.SumOfProductsConvCrate option
-TeqCrate.SumOfProductsConvCrate`1 - interface with 1 member(s)
-TeqCrate.SumOfProductsConvCrate`1.Apply [method]: TeqCrate.SumOfProductsConvEvaluator<'union, 'ret> -> 'ret
-TeqCrate.SumOfProductsConvEvaluator`2 - interface with 1 member(s)
-TeqCrate.SumOfProductsConvEvaluator`2.Eval [method]: string list -> 'tss HCollections.TypeListList -> TeqCrate.Conv<'union, 'tss HCollections.SumOfProducts> -> 'ret
-TeqCrate.TripleTeqCrate inherit obj
-TeqCrate.TripleTeqCrate.make [static method]: unit -> ('a * 'b * 'c) TeqCrate.TripleTeqCrate
-TeqCrate.TripleTeqCrate.tryMake [static method]: unit -> 'a TeqCrate.TripleTeqCrate option
-TeqCrate.TripleTeqCrate`1 - interface with 1 member(s)
-TeqCrate.TripleTeqCrate`1.Apply [method]: TeqCrate.TripleTeqEvaluator<'a, 'ret> -> 'ret
-TeqCrate.TripleTeqEvaluator`2 - interface with 1 member(s)
-TeqCrate.TripleTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, ('b * 'c * 'd)> -> 'ret
-TeqCrate.Tuple inherit obj
-TeqCrate.Tuple.tryFoldTuple [static method]: 'state HCollections.HListFolder -> 'state -> 'tuple -> 'state option
-TeqCrate.TupleConvCrate inherit obj
-TeqCrate.TupleConvCrate.tryMake [static method]: unit -> 'tuple TeqCrate.TupleConvCrate option
-TeqCrate.TupleConvCrate`1 - interface with 1 member(s)
-TeqCrate.TupleConvCrate`1.Apply [method]: TeqCrate.TupleConvEvaluator<'tuple, 'ret> -> 'ret
-TeqCrate.TupleConvEvaluator`2 - interface with 1 member(s)
-TeqCrate.TupleConvEvaluator`2.Eval [method]: 'ts HCollections.TypeList -> TeqCrate.Conv<'tuple, 'ts HCollections.HList> -> 'ret
-TeqCrate.Type inherit obj
-TeqCrate.Type.print [static method]: System.Type -> string
-TeqCrate.TypeField inherit obj
-TeqCrate.TypeField.attributes [static method]: 'case TeqCrate.TypeField -> System.Reflection.CustomAttributeData list
-TeqCrate.TypeField.name [static method]: 'case TeqCrate.TypeField -> string
-TeqCrate.TypeField`1 inherit obj
-TeqCrate.TypeField`1..ctor [constructor]: (string, System.Reflection.CustomAttributeData list, 'case)
-TeqCrate.TypeField`1.Attributes [property]: [read-only] System.Reflection.CustomAttributeData list
-TeqCrate.TypeField`1.get_Attributes [method]: unit -> System.Reflection.CustomAttributeData list
-TeqCrate.TypeField`1.get_Name [method]: unit -> string
-TeqCrate.TypeField`1.get_RawCase [method]: unit -> 'case
-TeqCrate.TypeField`1.Name [property]: [read-only] string
-TeqCrate.TypeField`1.RawCase [property]: [read-only] 'case
-TeqCrate.TypeListCrate - interface with 1 member(s)
-TeqCrate.TypeListCrate.Apply [method]: 'ret TeqCrate.TypeListEvaluator -> 'ret
-TeqCrate.TypeListCrateModule inherit obj
-TeqCrate.TypeListCrateModule.make [static method]: 'ts HCollections.TypeList -> TeqCrate.TypeListCrate
-TeqCrate.TypeListCrateModule.makeUntyped [static method]: System.Type list -> TeqCrate.TypeListCrate
-TeqCrate.TypeListEvaluator`1 - interface with 1 member(s)
-TeqCrate.TypeListEvaluator`1.Eval [method]: 'ts HCollections.TypeList -> 'ret
-TeqCrate.TypeParameterCrate - interface with 1 member(s)
-TeqCrate.TypeParameterCrate.Apply [method]: 'ret TeqCrate.TypeParameterEvaluator -> 'ret
-TeqCrate.TypeParameterCrateModule inherit obj
-TeqCrate.TypeParameterCrateModule.make [static method]: unit -> TeqCrate.TypeParameterCrate
-TeqCrate.TypeParameterCrateModule.makeUntyped [static method]: System.Type -> TeqCrate.TypeParameterCrate
-TeqCrate.TypeParameterCrateModule.toType [static method]: TeqCrate.TypeParameterCrate -> System.Type
-TeqCrate.TypeParameterEvaluator`1 - interface with 1 member(s)
-TeqCrate.TypeParameterEvaluator`1.Eval [method]: unit -> 'ret
-TeqCrate.TypePatterns inherit obj
-TeqCrate.TypePatterns.|Array|_| [static method]: System.Type -> System.Type option
-TeqCrate.TypePatterns.|Fun|_| [static method]: System.Type -> (System.Type * System.Type) option
-TeqCrate.TypePatterns.|Generic|_| [static method]: System.Type -> (System.Type * System.Type list) option
-TeqCrate.TypePatterns.|Record|_| [static method]: System.Type -> (System.Reflection.PropertyInfo TeqCrate.TypeField * System.Type) list option
-TeqCrate.TypePatterns.|Tuple|_| [static method]: System.Type -> System.Type list option
-TeqCrate.TypePatterns.|Union|_| [static method]: System.Type -> Microsoft.FSharp.Reflection.UnionCaseInfo list option
-TeqCrate.UnionConvCrate inherit obj
-TeqCrate.UnionConvCrate.tryMake [static method]: unit -> 'union TeqCrate.UnionConvCrate option
-TeqCrate.UnionConvCrate`1 - interface with 1 member(s)
-TeqCrate.UnionConvCrate`1.Apply [method]: TeqCrate.UnionConvEvaluator<'union, 'ret> -> 'ret
-TeqCrate.UnionConvEvaluator`2 - interface with 1 member(s)
-TeqCrate.UnionConvEvaluator`2.Eval [method]: Microsoft.FSharp.Reflection.UnionCaseInfo TeqCrate.TypeField list -> 'ts HCollections.TypeList -> TeqCrate.Conv<'union, 'ts HCollections.HUnion> -> 'ret
+ShapeSifter.ArrayTeqCrate inherit obj
+ShapeSifter.ArrayTeqCrate.make [static method]: unit -> 'a [] ShapeSifter.ArrayTeqCrate
+ShapeSifter.ArrayTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.ArrayTeqCrate option
+ShapeSifter.ArrayTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.ArrayTeqCrate`1.Apply [method]: ShapeSifter.ArrayTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.ArrayTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.ArrayTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b []> -> 'ret
+ShapeSifter.Conv inherit obj
+ShapeSifter.Conv.compose [static method]: ShapeSifter.Conv<'a, 'b> -> ShapeSifter.Conv<'b, 'c> -> ShapeSifter.Conv<'a, 'c>
+ShapeSifter.Conv.make [static method]: ('a -> 'b) -> ('b -> 'a) -> ShapeSifter.Conv<'a, 'b>
+ShapeSifter.Conv`2 inherit obj
+ShapeSifter.Conv`2..ctor [constructor]: ('a -> 'b, 'b -> 'a)
+ShapeSifter.Conv`2.From [property]: [read-only] 'b -> 'a
+ShapeSifter.Conv`2.get_From [method]: unit -> ('b -> 'a)
+ShapeSifter.Conv`2.get_To [method]: unit -> ('a -> 'b)
+ShapeSifter.Conv`2.To [property]: [read-only] 'a -> 'b
+ShapeSifter.DictionaryTeqCrate inherit obj
+ShapeSifter.DictionaryTeqCrate.make [static method]: unit -> System.Collections.Generic.Dictionary<'k, 'v> ShapeSifter.DictionaryTeqCrate
+ShapeSifter.DictionaryTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.DictionaryTeqCrate option
+ShapeSifter.DictionaryTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.DictionaryTeqCrate`1.Apply [method]: ShapeSifter.DictionaryTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.DictionaryTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.DictionaryTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, System.Collections.Generic.Dictionary<'k, 'v>> -> 'ret
+ShapeSifter.FunTeqCrate inherit obj
+ShapeSifter.FunTeqCrate.make [static method]: unit -> ('a -> 'b) ShapeSifter.FunTeqCrate
+ShapeSifter.FunTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.FunTeqCrate option
+ShapeSifter.FunTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.FunTeqCrate`1.Apply [method]: ShapeSifter.FunTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.FunTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.FunTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b -> 'c> -> 'ret
+ShapeSifter.ListTeqCrate inherit obj
+ShapeSifter.ListTeqCrate.make [static method]: unit -> 'a list ShapeSifter.ListTeqCrate
+ShapeSifter.ListTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.ListTeqCrate option
+ShapeSifter.ListTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.ListTeqCrate`1.Apply [method]: ShapeSifter.ListTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.ListTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.ListTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b list> -> 'ret
+ShapeSifter.MapTeqCrate inherit obj
+ShapeSifter.MapTeqCrate.make [static method]: unit -> Map<'k, 'v> ShapeSifter.MapTeqCrate
+ShapeSifter.MapTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.MapTeqCrate option
+ShapeSifter.MapTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.MapTeqCrate`1.Apply [method]: ShapeSifter.MapTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.MapTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.MapTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, Map<'k, 'v>> -> 'ret
+ShapeSifter.OptionTeqCrate inherit obj
+ShapeSifter.OptionTeqCrate.make [static method]: unit -> 'a option ShapeSifter.OptionTeqCrate
+ShapeSifter.OptionTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.OptionTeqCrate option
+ShapeSifter.OptionTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.OptionTeqCrate`1.Apply [method]: ShapeSifter.OptionTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.OptionTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.OptionTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b option> -> 'ret
+ShapeSifter.PairTeqCrate inherit obj
+ShapeSifter.PairTeqCrate.make [static method]: unit -> ('a * 'b) ShapeSifter.PairTeqCrate
+ShapeSifter.PairTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.PairTeqCrate option
+ShapeSifter.PairTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.PairTeqCrate`1.Apply [method]: ShapeSifter.PairTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.PairTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.PairTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, ('b * 'c)> -> 'ret
+ShapeSifter.Patterns inherit obj
+ShapeSifter.Patterns+TType`1 inherit obj, implements 'a ShapeSifter.Patterns+TType System.IEquatable, System.Collections.IStructuralEquatable, 'a ShapeSifter.Patterns+TType System.IComparable, System.IComparable, System.Collections.IStructuralComparable - union type with 1 cases
+ShapeSifter.Patterns+TType`1.get_Item [method]: unit -> unit
+ShapeSifter.Patterns+TType`1.get_Tag [method]: unit -> int
+ShapeSifter.Patterns+TType`1.Item [property]: [read-only] unit
+ShapeSifter.Patterns+TType`1.NewTType [static method]: unit -> 'a ShapeSifter.Patterns+TType
+ShapeSifter.Patterns+TType`1.Tag [property]: [read-only] int
+ShapeSifter.Patterns.tType [static method]: unit -> 'a ShapeSifter.Patterns+TType
+ShapeSifter.Patterns.|Array|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.ArrayTeqCrate option
+ShapeSifter.Patterns.|Bool|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, bool> option
+ShapeSifter.Patterns.|DateTime|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, System.DateTime> option
+ShapeSifter.Patterns.|Dictionary|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.DictionaryTeqCrate option
+ShapeSifter.Patterns.|Float|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, float> option
+ShapeSifter.Patterns.|Fun|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.FunTeqCrate option
+ShapeSifter.Patterns.|Int64|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, System.Int64> option
+ShapeSifter.Patterns.|Int|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, int> option
+ShapeSifter.Patterns.|List|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.ListTeqCrate option
+ShapeSifter.Patterns.|Map|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.MapTeqCrate option
+ShapeSifter.Patterns.|Option|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.OptionTeqCrate option
+ShapeSifter.Patterns.|Pair|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.PairTeqCrate option
+ShapeSifter.Patterns.|Record|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.RecordConvCrate option
+ShapeSifter.Patterns.|ResizeArray|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.ResizeArrayTeqCrate option
+ShapeSifter.Patterns.|Seq|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.SeqTeqCrate option
+ShapeSifter.Patterns.|Set|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.SetTeqCrate option
+ShapeSifter.Patterns.|String|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, string> option
+ShapeSifter.Patterns.|SumOfProducts|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.SumOfProductsConvCrate option
+ShapeSifter.Patterns.|Teq|_| [static method]: 'b ShapeSifter.Patterns+TType -> 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, 'b> option
+ShapeSifter.Patterns.|TimeSpan|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, System.TimeSpan> option
+ShapeSifter.Patterns.|Triple|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.TripleTeqCrate option
+ShapeSifter.Patterns.|Tuple|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.TupleConvCrate option
+ShapeSifter.Patterns.|Union|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.UnionConvCrate option
+ShapeSifter.Patterns.|Unit|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, unit> option
+ShapeSifter.RecordConvCrate inherit obj
+ShapeSifter.RecordConvCrate.tryMake [static method]: unit -> 'record ShapeSifter.RecordConvCrate option
+ShapeSifter.RecordConvCrate`1 - interface with 1 member(s)
+ShapeSifter.RecordConvCrate`1.Apply [method]: ShapeSifter.RecordConvEvaluator<'record, 'ret> -> 'ret
+ShapeSifter.RecordConvEvaluator`2 - interface with 1 member(s)
+ShapeSifter.RecordConvEvaluator`2.Eval [method]: System.Reflection.PropertyInfo ShapeSifter.TypeField list -> 'ts HCollections.TypeList -> ShapeSifter.Conv<'record, 'ts HCollections.HList> -> 'ret
+ShapeSifter.Reflection inherit obj
+ShapeSifter.Reflection.invokeStaticMethod [static method]: Microsoft.FSharp.Quotations.FSharpExpr -> (System.Type seq -> obj seq -> obj)
+ShapeSifter.ResizeArrayTeqCrate inherit obj
+ShapeSifter.ResizeArrayTeqCrate.make [static method]: unit -> 'a System.Collections.Generic.List ShapeSifter.ResizeArrayTeqCrate
+ShapeSifter.ResizeArrayTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.ResizeArrayTeqCrate option
+ShapeSifter.ResizeArrayTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.ResizeArrayTeqCrate`1.Apply [method]: ShapeSifter.ResizeArrayTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.ResizeArrayTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.ResizeArrayTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b System.Collections.Generic.List> -> 'ret
+ShapeSifter.SeqTeqCrate inherit obj
+ShapeSifter.SeqTeqCrate.make [static method]: unit -> 'a seq ShapeSifter.SeqTeqCrate
+ShapeSifter.SeqTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.SeqTeqCrate option
+ShapeSifter.SeqTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.SeqTeqCrate`1.Apply [method]: ShapeSifter.SeqTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.SeqTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.SeqTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b seq> -> 'ret
+ShapeSifter.SetTeqCrate inherit obj
+ShapeSifter.SetTeqCrate.make [static method]: unit -> 'a Microsoft.FSharp.Collections.FSharpSet ShapeSifter.SetTeqCrate
+ShapeSifter.SetTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.SetTeqCrate option
+ShapeSifter.SetTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.SetTeqCrate`1.Apply [method]: ShapeSifter.SetTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.SetTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.SetTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b Microsoft.FSharp.Collections.FSharpSet> -> 'ret
+ShapeSifter.SumOfProductsConvCrate inherit obj
+ShapeSifter.SumOfProductsConvCrate.tryMake [static method]: unit -> 'union ShapeSifter.SumOfProductsConvCrate option
+ShapeSifter.SumOfProductsConvCrate`1 - interface with 1 member(s)
+ShapeSifter.SumOfProductsConvCrate`1.Apply [method]: ShapeSifter.SumOfProductsConvEvaluator<'union, 'ret> -> 'ret
+ShapeSifter.SumOfProductsConvEvaluator`2 - interface with 1 member(s)
+ShapeSifter.SumOfProductsConvEvaluator`2.Eval [method]: string list -> 'tss HCollections.TypeListList -> ShapeSifter.Conv<'union, 'tss HCollections.SumOfProducts> -> 'ret
+ShapeSifter.TripleTeqCrate inherit obj
+ShapeSifter.TripleTeqCrate.make [static method]: unit -> ('a * 'b * 'c) ShapeSifter.TripleTeqCrate
+ShapeSifter.TripleTeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.TripleTeqCrate option
+ShapeSifter.TripleTeqCrate`1 - interface with 1 member(s)
+ShapeSifter.TripleTeqCrate`1.Apply [method]: ShapeSifter.TripleTeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.TripleTeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.TripleTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, ('b * 'c * 'd)> -> 'ret
+ShapeSifter.Tuple inherit obj
+ShapeSifter.Tuple.tryFoldTuple [static method]: 'state HCollections.HListFolder -> 'state -> 'tuple -> 'state option
+ShapeSifter.TupleConvCrate inherit obj
+ShapeSifter.TupleConvCrate.tryMake [static method]: unit -> 'tuple ShapeSifter.TupleConvCrate option
+ShapeSifter.TupleConvCrate`1 - interface with 1 member(s)
+ShapeSifter.TupleConvCrate`1.Apply [method]: ShapeSifter.TupleConvEvaluator<'tuple, 'ret> -> 'ret
+ShapeSifter.TupleConvEvaluator`2 - interface with 1 member(s)
+ShapeSifter.TupleConvEvaluator`2.Eval [method]: 'ts HCollections.TypeList -> ShapeSifter.Conv<'tuple, 'ts HCollections.HList> -> 'ret
+ShapeSifter.Type inherit obj
+ShapeSifter.Type.print [static method]: System.Type -> string
+ShapeSifter.TypeField inherit obj
+ShapeSifter.TypeField.attributes [static method]: 'case ShapeSifter.TypeField -> System.Reflection.CustomAttributeData list
+ShapeSifter.TypeField.name [static method]: 'case ShapeSifter.TypeField -> string
+ShapeSifter.TypeField`1 inherit obj
+ShapeSifter.TypeField`1..ctor [constructor]: (string, System.Reflection.CustomAttributeData list, 'case)
+ShapeSifter.TypeField`1.Attributes [property]: [read-only] System.Reflection.CustomAttributeData list
+ShapeSifter.TypeField`1.get_Attributes [method]: unit -> System.Reflection.CustomAttributeData list
+ShapeSifter.TypeField`1.get_Name [method]: unit -> string
+ShapeSifter.TypeField`1.get_RawCase [method]: unit -> 'case
+ShapeSifter.TypeField`1.Name [property]: [read-only] string
+ShapeSifter.TypeField`1.RawCase [property]: [read-only] 'case
+ShapeSifter.TypeListCrate - interface with 1 member(s)
+ShapeSifter.TypeListCrate.Apply [method]: 'ret ShapeSifter.TypeListEvaluator -> 'ret
+ShapeSifter.TypeListCrateModule inherit obj
+ShapeSifter.TypeListCrateModule.make [static method]: 'ts HCollections.TypeList -> ShapeSifter.TypeListCrate
+ShapeSifter.TypeListCrateModule.makeUntyped [static method]: System.Type list -> ShapeSifter.TypeListCrate
+ShapeSifter.TypeListEvaluator`1 - interface with 1 member(s)
+ShapeSifter.TypeListEvaluator`1.Eval [method]: 'ts HCollections.TypeList -> 'ret
+ShapeSifter.TypeParameterCrate - interface with 1 member(s)
+ShapeSifter.TypeParameterCrate.Apply [method]: 'ret ShapeSifter.TypeParameterEvaluator -> 'ret
+ShapeSifter.TypeParameterCrateModule inherit obj
+ShapeSifter.TypeParameterCrateModule.make [static method]: unit -> ShapeSifter.TypeParameterCrate
+ShapeSifter.TypeParameterCrateModule.makeUntyped [static method]: System.Type -> ShapeSifter.TypeParameterCrate
+ShapeSifter.TypeParameterCrateModule.toType [static method]: ShapeSifter.TypeParameterCrate -> System.Type
+ShapeSifter.TypeParameterEvaluator`1 - interface with 1 member(s)
+ShapeSifter.TypeParameterEvaluator`1.Eval [method]: unit -> 'ret
+ShapeSifter.TypePatterns inherit obj
+ShapeSifter.TypePatterns.|Array|_| [static method]: System.Type -> System.Type option
+ShapeSifter.TypePatterns.|Fun|_| [static method]: System.Type -> (System.Type * System.Type) option
+ShapeSifter.TypePatterns.|Generic|_| [static method]: System.Type -> (System.Type * System.Type list) option
+ShapeSifter.TypePatterns.|Record|_| [static method]: System.Type -> (System.Reflection.PropertyInfo ShapeSifter.TypeField * System.Type) list option
+ShapeSifter.TypePatterns.|Tuple|_| [static method]: System.Type -> System.Type list option
+ShapeSifter.TypePatterns.|Union|_| [static method]: System.Type -> Microsoft.FSharp.Reflection.UnionCaseInfo list option
+ShapeSifter.UnionConvCrate inherit obj
+ShapeSifter.UnionConvCrate.tryMake [static method]: unit -> 'union ShapeSifter.UnionConvCrate option
+ShapeSifter.UnionConvCrate`1 - interface with 1 member(s)
+ShapeSifter.UnionConvCrate`1.Apply [method]: ShapeSifter.UnionConvEvaluator<'union, 'ret> -> 'ret
+ShapeSifter.UnionConvEvaluator`2 - interface with 1 member(s)
+ShapeSifter.UnionConvEvaluator`2.Eval [method]: Microsoft.FSharp.Reflection.UnionCaseInfo ShapeSifter.TypeField list -> 'ts HCollections.TypeList -> ShapeSifter.Conv<'union, 'ts HCollections.HUnion> -> 'ret
