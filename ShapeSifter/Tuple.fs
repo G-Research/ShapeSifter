@@ -1,7 +1,7 @@
-﻿namespace TeqCrate
+﻿namespace ShapeSifter
 
 open HCollections
-open TeqCrate.Patterns
+open ShapeSifter.Patterns
 
 [<RequireQualifiedAccess>]
 module Tuple =
