@@ -22,9 +22,6 @@ jobs:
         dotnet:
           - { sdk: 6.0.x, framework: net6.0 }
           - { sdk: 8.0.x, framework: net8.0 }
-        include:
-          - os: windows-latest
-            dotnet: { sdk: 6.0.x, framework: net481 }
 
     runs-on: ${{matrix.os}}
 
