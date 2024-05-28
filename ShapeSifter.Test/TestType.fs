@@ -26,5 +26,5 @@ module TestType =
         |> List.map (fun (t, expected) -> [| box t ; box expected |])
 
     [<Test>]
-    [<TestCaseSource (nameof testCases)>]
+    [<TestCaseSource(nameof testCases)>]
     let ``Test print`` (t : Type, expected : string) : unit = Type.print t |> shouldEqual expected

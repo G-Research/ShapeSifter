@@ -32,8 +32,7 @@ module TestPatterns =
     [<Test>]
     let ``Array active pattern recognises an array`` () =
         let arr = [| "foo" ; "bar" |]
-        tryGetArrayLength arr
-        |> shouldEqual (Some 2)
+        tryGetArrayLength arr |> shouldEqual (Some 2)
 
     let tryGetListLength (xs : 'a) : int option =
         match tType<'a> with
@@ -48,8 +47,7 @@ module TestPatterns =
     [<Test>]
     let ``List active pattern recognises a list`` () =
         let xs = [ 1..10 ]
-        tryGetListLength xs
-        |> shouldEqual (Some 10)
+        tryGetListLength xs |> shouldEqual (Some 10)
 
     let tryGetMapCount (map : 'a) : int option =
         match tType<'a> with
@@ -64,16 +62,14 @@ module TestPatterns =
     [<Test>]
     let ``Map active pattern recognises a map`` () =
         let map = Map.empty |> Map.add "foo" 3 |> Map.add "bar" 12
-        tryGetMapCount map
-        |> shouldEqual (Some 2)
+        tryGetMapCount map |> shouldEqual (Some 2)
 
     [<Test>]
     let ``Tuple active pattern recognises a tuple`` () =
 
         let tuple = 5, "hello", false, 8, 2
         let sumOfInts = Tuple.tryFoldTuple (HListFolder.makeElementFolder (+)) 0 tuple
-        sumOfInts
-        |> shouldEqual (Some 15)
+        sumOfInts |> shouldEqual (Some 15)
 
     [<Test>]
     let ``Fun active pattern recognises a function`` () =
