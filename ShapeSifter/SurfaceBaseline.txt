@@ -5,6 +5,13 @@ ShapeSifter.ArrayTeqCrate`1 - interface with 1 member(s)
 ShapeSifter.ArrayTeqCrate`1.Apply [method]: ShapeSifter.ArrayTeqEvaluator<'a, 'ret> -> 'ret
 ShapeSifter.ArrayTeqEvaluator`2 - interface with 1 member(s)
 ShapeSifter.ArrayTeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, 'b []> -> 'ret
+ShapeSifter.Choice2TeqCrate inherit obj
+ShapeSifter.Choice2TeqCrate.make [static method]: unit -> Microsoft.FSharp.Core.FSharpChoice<'b1, 'b2> ShapeSifter.Choice2TeqCrate
+ShapeSifter.Choice2TeqCrate.tryMake [static method]: unit -> 'a ShapeSifter.Choice2TeqCrate option
+ShapeSifter.Choice2TeqCrate`1 - interface with 1 member(s)
+ShapeSifter.Choice2TeqCrate`1.Apply [method]: ShapeSifter.Choice2TeqEvaluator<'a, 'ret> -> 'ret
+ShapeSifter.Choice2TeqEvaluator`2 - interface with 1 member(s)
+ShapeSifter.Choice2TeqEvaluator`2.Eval [method]: TypeEquality.Teq<'a, Microsoft.FSharp.Core.FSharpChoice<'b1, 'b2>> -> 'ret
 ShapeSifter.Conv inherit obj
 ShapeSifter.Conv.compose [static method]: ShapeSifter.Conv<'a, 'b> -> ShapeSifter.Conv<'b, 'c> -> ShapeSifter.Conv<'a, 'c>
 ShapeSifter.Conv.make [static method]: ('a -> 'b) -> ('b -> 'a) -> ShapeSifter.Conv<'a, 'b>
@@ -66,6 +73,7 @@ ShapeSifter.Patterns+TType`1.Tag [property]: [read-only] int
 ShapeSifter.Patterns.tType [static method]: unit -> 'a ShapeSifter.Patterns+TType
 ShapeSifter.Patterns.|Array|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.ArrayTeqCrate option
 ShapeSifter.Patterns.|Bool|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, bool> option
+ShapeSifter.Patterns.|Choice2|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.Choice2TeqCrate option
 ShapeSifter.Patterns.|DateTime|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, System.DateTime> option
 ShapeSifter.Patterns.|Dictionary|_| [static method]: 'a ShapeSifter.Patterns+TType -> 'a ShapeSifter.DictionaryTeqCrate option
 ShapeSifter.Patterns.|Float|_| [static method]: 'a ShapeSifter.Patterns+TType -> TypeEquality.Teq<'a, float> option
