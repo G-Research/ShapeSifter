@@ -17,15 +17,7 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <SourceLinkGitHubHost Include="github.com" ContentUrl="https://raw.githubusercontent.com" />
   </ItemGroup>
-  <!--
-    SourceLink doesn't support F# deterministic builds out of the box,
-    so tell SourceLink that our source root is going to be remapped.
-  -->
-  <Target Name="MapSourceRoot" BeforeTargets="_GenerateSourceLinkFile" Condition="'$(SourceRootMappedPathsFeatureSupported)' != 'true'">
-    <ItemGroup>
-      <SourceRoot Update="@(SourceRoot)">
-        <MappedPath>Z:\CheckoutRoot\TeqCrate\</MappedPath>
-      </SourceRoot>
-    </ItemGroup>
-  </Target>
+  <PropertyGroup Condition="'$(GITHUB_ACTION)' != ''">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 </Project>

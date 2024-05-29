@@ -17,6 +17,7 @@ module Patterns =
 
     /// Single constructor for TType - creates a TType value of 'a when invoked with any generic
     /// type parameter 'a
+    [<RequiresExplicitTypeArguments>]
     val tType<'a> : 'a TType
 
     /// Recognises tTypes that represent the bool type.

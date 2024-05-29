@@ -2,15 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <WarningLevel>5</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-    <Authors>Nicholas Cowle</Authors>
-    <Product>TeqCrate</Product>
-    <Description>TeqCrate is a type-safe datatype-generic programming library for F#. It offers a type-safe and extensible way to inspect, decompose and create values for various kinds of common F# and .NET types.</Description>
-    <PackageProjectUrl>https://github.com/nickcowle/TeqCrate</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>ShapeSifter</PackageId>
+    <Authors>G-Research</Authors>
+    <Description>ShapeSifter is a type-safe datatype-generic programming library for F#. It offers a type-safe and extensible way to inspect, decompose and create values for various kinds of common F# and .NET types.</Description>
+    <Copyright>Copyright (c) G-Research 2024</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/G-Research/ShapeSifter</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>datatype generic type safe heterogeneous collection collections f# product sum data types equality</PackageTags>
+    <PackageTags>datatype;generic;typesafe;f#;product;sum</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,11 +40,12 @@
     <Compile Include="Tuple.fs" />
     <EmbeddedResource Include="SurfaceBaseline.txt" />
     <EmbeddedResource Include="version.json" />
+    <None Include="..\README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.5.0" />
-    <PackageReference Include="HCollections" Version="0.5.3" />
+    <PackageReference Include="HeterogeneousCollections" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

@@ -28,4 +28,14 @@
     <ProjectReference Include="..\ShapeSifter\ShapeSifter.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="CsvExample\CsvParser.fs" />
+    <Compile Include="CsvExample\TestCsvParser.fs" />
+    <EmbeddedResource Include="CsvExample\TestData.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="TestExamples.fs" />
+  </ItemGroup>
+
 </Project>
