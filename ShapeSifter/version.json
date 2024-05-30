@@ -1,7 +1,16 @@
 {
-  "version": "0.4",
+  "version": "1.0",
   "publicReleaseRefSpec": [
     "^refs/heads/main$"
   ],
-  "pathFilters": null
+  "pathFilters": [
+    ":/",
+    ":^ShapeSifter.Test/",
+    ":^/.github/",
+    ":^/.config/",
+    ":^/hooks/",
+    ":^/analyzers/",
+    ":^/.editorconfig",
+    ":^/CONTRIBUTING.md"
+  ]
 }
