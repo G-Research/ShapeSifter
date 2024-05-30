@@ -53,6 +53,8 @@ process_curl_error() {
 }
 
 test_process_curl_error() {
+    echo "Running tests."
+
     failed_output=$(cat <<'EOF'
 {
   "message": "Validation Failed",
@@ -73,6 +75,8 @@ EOF
         echo "Test failure: got exit code $script_exit_code when we expected 0"
         exit $script_exit_code
     fi
+
+    echo "Tests completed."
 }
 
 if [[ "$DRY_RUN" = "1" ]]; then
