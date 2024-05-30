@@ -40,9 +40,9 @@ process_curl_error() {
         script_exit_code=3
     else
         github_error="$(jq -r "$jq_query" curl_output.json)"
-        echo "$github_error"
+        echo "Error reported by GitHub: $github_error"
 
-        if [ "$github_error" != "Did not create GitHub release because it already exists at this version." ]; then
+        if [ "$github_error" != "already_exists" ]; then
             echo "Unrecognised error message"
             script_exit_code=4
         else
