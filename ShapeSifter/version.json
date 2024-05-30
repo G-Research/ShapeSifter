@@ -10,6 +10,7 @@
     ":^/.config/",
     ":^/hooks/",
     ":^/analyzers/",
-    ":^/.editorconfig"
+    ":^/.editorconfig",
+    ":^/CONTRIBUTING.md"
   ]
 }
