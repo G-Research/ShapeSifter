@@ -12,21 +12,52 @@ module TestPatterns =
 
     [<Test>]
     let ``Teq active pattern distinguishes int from string`` () =
-
         let t1 = tType<int>
         let t2 = tType<string>
 
         match t1 with
-        | Teq t2 teq -> failwith "Expected int != string"
+        | Teq t2 _teq -> failwith "Expected int != string"
         | _ -> ()
+
+    [<Test>]
+    let ``Option active pattern recognises an option`` () : unit =
+        let print (x : 'a) : string option =
+            match tType<'a> with
+            | Option crate ->
+                { new OptionTeqEvaluator<_, _> with
+                    member _.Eval<'b> (teq : Teq<'a, 'b option>) =
+                        Teq.castTo teq x |> Option.map (sprintf "%O")
+                }
+                |> crate.Apply
+            | _ -> failwith "should have received an option"
+
+        print (Some 3) |> shouldEqual (Some "3")
+        print None |> shouldEqual None
+
+    [<Test>]
+    let ``Choice2 active pattern recognises a choice`` () : unit =
+        let print (x : 'a) : Choice<string, string> =
+            match tType<'a> with
+            | Choice2 crate ->
+                { new Choice2TeqEvaluator<_, _> with
+                    member _.Eval teq =
+                        match Teq.castTo teq x with
+                        | Choice1Of2 c1 -> c1.ToString () |> Choice1Of2
+                        | Choice2Of2 c2 -> c2.ToString () |> Choice2Of2
+                }
+                |> crate.Apply
+            | _ -> failwith "should have received a choice2"
+
+        print (Choice1Of2 3) |> shouldEqual (Choice1Of2 "3")
+        print (Choice2Of2 "hi") |> shouldEqual (Choice2Of2 "hi")
 
     let tryGetArrayLength (arr : 'a) : int option =
         match tType<'a> with
         | Array c ->
-            c.Apply
-                { new ArrayTeqEvaluator<_, _> with
-                    member __.Eval teq = (Teq.castTo teq arr).Length |> Some
-                }
+            { new ArrayTeqEvaluator<_, _> with
+                member _.Eval teq = (Teq.castTo teq arr).Length |> Some
+            }
+            |> c.Apply
         | _ -> None
 
     [<Test>]
@@ -39,7 +70,7 @@ module TestPatterns =
         | List c ->
             c.Apply
                 { new ListTeqEvaluator<_, _> with
-                    member __.Eval teq =
+                    member _.Eval teq =
                         xs |> Teq.castTo teq |> List.length |> Some
                 }
         | _ -> None
@@ -52,11 +83,11 @@ module TestPatterns =
     let tryGetMapCount (map : 'a) : int option =
         match tType<'a> with
         | Map c ->
-            c.Apply
-                { new MapTeqEvaluator<_, _> with
-                    member __.Eval teq =
-                        map |> Teq.castTo teq |> Map.count |> Some
-                }
+            { new MapTeqEvaluator<_, _> with
+                member _.Eval teq =
+                    map |> Teq.castTo teq |> Map.count |> Some
+            }
+            |> c.Apply
         | _ -> None
 
     [<Test>]
@@ -66,21 +97,19 @@ module TestPatterns =
 
     [<Test>]
     let ``Tuple active pattern recognises a tuple`` () =
-
         let tuple = 5, "hello", false, 8, 2
         let sumOfInts = Tuple.tryFoldTuple (HListFolder.makeElementFolder (+)) 0 tuple
         sumOfInts |> shouldEqual (Some 15)
 
     [<Test>]
     let ``Fun active pattern recognises a function`` () =
-
         match tType<int -> string> with
         | Fun c ->
             let dom, ran =
-                c.Apply
-                    { new FunTeqEvaluator<_, _> with
-                        member __.Eval (teq : Teq<int -> string, 'a -> 'b>) = typeof<'a>, typeof<'b>
-                    }
+                { new FunTeqEvaluator<_, _> with
+                    member _.Eval (teq : Teq<int -> string, 'a -> 'b>) = typeof<'a>, typeof<'b>
+                }
+                |> c.Apply
 
             dom |> shouldEqual typeof<int>
             ran |> shouldEqual typeof<string>
@@ -89,14 +118,13 @@ module TestPatterns =
 
     [<Test>]
     let ``Pair active pattern recognises a pair`` () =
-
         match tType<int * string> with
         | Pair c ->
             let t1, t2 =
-                c.Apply
-                    { new PairTeqEvaluator<_, _> with
-                        member __.Eval (teq : Teq<int * string, 'a * 'b>) = typeof<'a>, typeof<'b>
-                    }
+                { new PairTeqEvaluator<_, _> with
+                    member _.Eval (teq : Teq<int * string, 'a * 'b>) = typeof<'a>, typeof<'b>
+                }
+                |> c.Apply
 
             t1 |> shouldEqual typeof<int>
             t2 |> shouldEqual typeof<string>
@@ -119,11 +147,10 @@ module TestPatterns =
         match tType<int * string * bool> with
         | Triple c ->
             let t1, t2, t3 =
-                c.Apply
-                    { new TripleTeqEvaluator<_, _> with
-                        member __.Eval (teq : Teq<int * string * bool, 'a * 'b * 'c>) =
-                            typeof<'a>, typeof<'b>, typeof<'c>
-                    }
+                { new TripleTeqEvaluator<_, _> with
+                    member _.Eval (teq : Teq<int * string * bool, 'a * 'b * 'c>) = typeof<'a>, typeof<'b>, typeof<'c>
+                }
+                |> c.Apply
 
             t1 |> shouldEqual typeof<int>
             t2 |> shouldEqual typeof<string>
@@ -141,31 +168,29 @@ module TestPatterns =
     let tryGetStringKeyValues (record : 'a) : Map<string, string> option =
         match tType<'a> with
         | Record c ->
-            c.Apply
-                { new RecordConvEvaluator<_, _> with
-                    member __.Eval names _ conv =
+            { new RecordConvEvaluator<_, _> with
+                member _.Eval names _ conv =
+                    let folder =
+                        let f (names : string list, map) (value : string option) =
+                            let map =
+                                match value with
+                                | Some v -> Map.add (names |> List.head) v map
+                                | None -> map
 
-                        let folder =
-                            let f (names : string list, map) (value : string option) =
-                                let map =
-                                    match value with
-                                    | Some v -> Map.add (names |> List.head) v map
-                                    | None -> map
+                            names |> List.tail, map
 
-                                names |> List.tail, map
+                        HListFolder.makeGappedElementFolder f
 
-                            HListFolder.makeGappedElementFolder f
+                    let names = names |> List.map TypeField.name
 
-                        let names = names |> List.map TypeField.name
-
-                        record |> conv.To |> HList.fold folder (names, Map.empty) |> snd
-                }
+                    record |> conv.To |> HList.fold folder (names, Map.empty) |> snd
+            }
+            |> c.Apply
             |> Some
         | _ -> None
 
     [<Test>]
     let ``Record active pattern recognises a record`` () =
-
         let r =
             {
                 Foo = "hello"
@@ -188,79 +213,77 @@ module TestPatterns =
 
     [<Test>]
     let ``Union active pattern recognises a union`` () =
-
         let testValue = Bar (1234, "test", true)
 
         let result =
             match tType<TestUnion> with
             | Union c ->
-                c.Apply
-                    { new UnionConvEvaluator<_, _> with
-                        member __.Eval names ts (conv : Conv<TestUnion, 'a HUnion>) =
+                { new UnionConvEvaluator<_, _> with
+                    member _.Eval names ts (conv : Conv<TestUnion, 'a HUnion>) =
 
-                            let expectedNames = [ "Foo" ; "Bar" ; "Baz" ; "Quux" ]
-                            let actualNames = names |> List.map TypeField.name
-                            actualNames |> shouldEqual expectedNames
+                        let expectedNames = [ "Foo" ; "Bar" ; "Baz" ; "Quux" ]
+                        let actualNames = names |> List.map TypeField.name
+                        actualNames |> shouldEqual expectedNames
 
-                            let expectedUnionType =
-                                tType<(unit -> (int * string * bool) -> (string * float) -> string -> unit) HUnion>
+                        let expectedUnionType =
+                            tType<(unit -> int * string * bool -> string * float -> string -> unit) HUnion>
 
-                            match tType<'a HUnion> with
-                            | Teq expectedUnionType teq ->
-                                let converted = testValue |> conv.To |> Teq.castTo teq
+                        match tType<'a HUnion> with
+                        | Teq expectedUnionType teq ->
+                            let converted = testValue |> conv.To |> Teq.castTo teq
 
-                                match HUnion.split converted with
-                                | Choice1Of2 v -> failwith "expected Choice2Of2"
-                                | Choice2Of2 union ->
-                                    match HUnion.split union with
-                                    | Choice1Of2 (i : int, s : string, b : bool) ->
-                                        let convertedBack = converted |> Teq.castFrom teq |> conv.From
-                                        true
-                                    | Choice2Of2 _ -> failwith "expected Choice1Of2"
-                            | _ -> failwith "expected Teq"
-                    }
+                            match HUnion.split converted with
+                            | Choice1Of2 _ -> failwith "expected Choice2Of2"
+                            | Choice2Of2 union ->
+                                match HUnion.split union with
+                                | Choice1Of2 (_ : int, _ : string, _ : bool) ->
+                                    let _convertedBack = converted |> Teq.castFrom teq |> conv.From
+                                    true
+                                | Choice2Of2 _ -> failwith "expected Choice1Of2"
+                        | _ -> failwith "expected Teq"
+                }
+                |> c.Apply
             | _ -> failwith "expected Union"
 
         result |> shouldEqual true
 
     [<Test>]
     let ``SumOfProducts active pattern recognises a union`` () =
-
         let testValue = Bar (1234, "test", true)
 
         let result =
             match tType<TestUnion> with
             | SumOfProducts c ->
-                c.Apply
-                    { new SumOfProductsConvEvaluator<_, _> with
-                        member __.Eval names ts (conv : Conv<TestUnion, 'a SumOfProducts>) =
+                { new SumOfProductsConvEvaluator<_, _> with
+                    member _.Eval names ts (conv : Conv<TestUnion, 'a SumOfProducts>) =
 
-                            let expectedNames = [ "Foo" ; "Bar" ; "Baz" ; "Quux" ]
-                            names |> shouldEqual expectedNames
+                        let expectedNames = [ "Foo" ; "Bar" ; "Baz" ; "Quux" ]
+                        names |> shouldEqual expectedNames
 
-                            let expectedUnionType =
-                                tType<
-                                    (unit
-                                        -> (int -> string -> bool -> unit)
-                                        -> (string -> float -> unit)
-                                        -> (string -> unit)
-                                        -> unit) SumOfProducts
-                                 >
+                        let expectedUnionType =
+                            tType<
+                                (unit
+                                    -> (int -> string -> bool -> unit)
+                                    -> (string -> float -> unit)
+                                    -> (string -> unit)
+                                    -> unit) SumOfProducts
+                             >
 
-                            match tType<'a SumOfProducts> with
-                            | Teq expectedUnionType teq ->
-                                let converted = testValue |> conv.To |> Teq.castTo teq
+                        match tType<'a SumOfProducts> with
+                        | Teq expectedUnionType teq ->
+                            let converted = testValue |> conv.To |> Teq.castTo teq
 
-                                match SumOfProducts.split converted with
-                                | Choice1Of2 v -> failwith "expected Choice2Of2"
-                                | Choice2Of2 sop ->
-                                    match SumOfProducts.split sop with
-                                    | Choice1Of2 (xs : (int -> string -> bool -> unit) HList) ->
-                                        let convertedBack = converted |> Teq.castFrom teq |> conv.From
-                                        true
-                                    | Choice2Of2 _ -> failwith "expected Choice1Of2"
-                            | _ -> failwith "expected a Teq"
-                    }
+                            match SumOfProducts.split converted with
+                            | Choice1Of2 _ -> failwith "expected Choice2Of2"
+                            | Choice2Of2 sop ->
+                                match SumOfProducts.split sop with
+                                | Choice1Of2 (_ : (int -> string -> bool -> unit) HList) ->
+                                    let _convertedBack = converted |> Teq.castFrom teq |> conv.From
+                                    true
+                                | Choice2Of2 _ -> failwith "expected Choice1Of2"
+                        | _ -> failwith "expected a Teq"
+                }
+                |> c.Apply
             | _ -> failwith "expected a SumOfProducts"
 
         result |> shouldEqual true
@@ -292,18 +315,18 @@ module TestPatterns =
         let result =
             match tType<TestPrivateRecord> with
             | Record c ->
-                c.Apply
-                    { new RecordConvEvaluator<_, _> with
-                        member __.Eval<'a> names ts (conv : Conv<TestPrivateRecord, 'a HList>) =
+                { new RecordConvEvaluator<_, _> with
+                    member _.Eval<'a> names ts (conv : Conv<TestPrivateRecord, 'a HList>) =
 
-                            let expectedNames = [ "PrivateFoo" ; "PrivateBar" ; "PrivateBaz" ]
+                        let expectedNames = [ "PrivateFoo" ; "PrivateBar" ; "PrivateBaz" ]
 
-                            let actualNames = names |> List.map TypeField.name
+                        let actualNames = names |> List.map TypeField.name
 
-                            actualNames |> shouldEqual expectedNames
+                        actualNames |> shouldEqual expectedNames
 
-                            TypeList.toTypes ts = [ typeof<string> ; typeof<int> ; typeof<string> ]
-                    }
+                        TypeList.toTypes ts = [ typeof<string> ; typeof<int> ; typeof<string> ]
+                }
+                |> c.Apply
             | _ -> failwith "expected a record"
 
         result |> shouldEqual true
@@ -318,7 +341,6 @@ module TestPatterns =
 
     [<Test>]
     let ``Record active pattern recognises a public record whose fields are private`` () =
-
         let r =
             {
                 InternallyPrivateFoo = "hello"
@@ -337,19 +359,19 @@ module TestPatterns =
         let result =
             match tType<TestInternallyPrivateRecord> with
             | Record c ->
-                c.Apply
-                    { new RecordConvEvaluator<_, _> with
-                        member __.Eval<'a> names ts (conv : Conv<TestInternallyPrivateRecord, 'a HList>) =
+                { new RecordConvEvaluator<_, _> with
+                    member _.Eval<'a> names ts (conv : Conv<TestInternallyPrivateRecord, 'a HList>) =
 
-                            let expectedNames =
-                                [ "InternallyPrivateFoo" ; "InternallyPrivateBar" ; "InternallyPrivateBaz" ]
+                        let expectedNames =
+                            [ "InternallyPrivateFoo" ; "InternallyPrivateBar" ; "InternallyPrivateBaz" ]
 
-                            let actualNames = names |> List.map TypeField.name
+                        let actualNames = names |> List.map TypeField.name
 
-                            actualNames |> shouldEqual expectedNames
+                        actualNames |> shouldEqual expectedNames
 
-                            TypeList.toTypes ts = [ typeof<string> ; typeof<int> ; typeof<string> ]
-                    }
+                        TypeList.toTypes ts = [ typeof<string> ; typeof<int> ; typeof<string> ]
+                }
+                |> c.Apply
             | _ -> failwith "expected a record"
 
         result |> shouldEqual true
