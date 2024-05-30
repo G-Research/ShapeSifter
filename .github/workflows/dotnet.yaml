@@ -149,7 +149,7 @@ jobs:
         with:
           name: nuget-package
       - name: Publish to NuGet
-        run: dotnet nuget push "ShapeSifter.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "ShapeSifter.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicates
 
   github-tag-and-release:
     runs-on: ubuntu-latest
