@@ -1,4 +1,4 @@
-﻿namespace ShapeSifter
+namespace ShapeSifter
 
 open System.Collections.Generic
 open TypeEquality
@@ -31,7 +31,7 @@ module ArrayTeqCrate =
     val tryMake : unit -> 'a ArrayTeqCrate option
 
 
-/// The type of values that act on an ListTeqCrate.
+/// The type of values that act on a ListTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a 'b list for any 'b and returns a value of type 'ret
 type ListTeqEvaluator<'a, 'ret> =
@@ -59,7 +59,7 @@ module ListTeqCrate =
     val tryMake : unit -> 'a ListTeqCrate option
 
 
-/// The type of values that act on an SeqTeqEvaluator.
+/// The type of values that act on a SeqTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a 'b seq for any 'b and returns a value of type 'ret
 type SeqTeqEvaluator<'a, 'ret> =
@@ -87,7 +87,7 @@ module SeqTeqCrate =
     val tryMake : unit -> 'a SeqTeqCrate option
 
 
-/// The type of values that act on an OptionTeqEvaluator.
+/// The type of values that act on an OptionTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a 'b option for any 'b and returns a value of type 'ret
 type OptionTeqEvaluator<'a, 'ret> =
@@ -114,11 +114,11 @@ module OptionTeqCrate =
     /// Otherwise, returns None.
     val tryMake : unit -> 'a OptionTeqCrate option
 
-/// The type of values that act on a ChoiceTeqEvaluator.
+/// The type of values that act on a Choice2TeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
-/// first type parameter and a Choice<'b1, 'b2> for any 'b_i and returns a value of type 'ret
+/// first type parameter and a Choice<'b1, 'b2> for any 'b_i and returns a value of type 'ret.
 type Choice2TeqEvaluator<'a, 'ret> =
-    /// This is the function that you wish to evaluate when you visit an `OptionTeqCrate` using this evaluator.
+    /// This is the function that you wish to evaluate when you visit a `Choice2TeqCrate` using this evaluator.
     abstract Eval<'b1, 'b2> : Teq<'a, Choice<'b1, 'b2>> -> 'ret
 
 /// An encoding of an existentially quantified type equality between 'a and a Choice<'b1, 'b2> for some 'b_i.
@@ -127,7 +127,7 @@ type 'a Choice2TeqCrate =
     /// Visit this crate with the given evaluator to reveal the type parameters within the crate.
     abstract Apply : Choice2TeqEvaluator<'a, 'ret> -> 'ret
 
-/// An encoding of an existentially quantified type equality between 'a and a Choice<'b1, 'b2> some 'b_i.
+/// An encoding of an existentially quantified type equality between 'a and a Choice<'b1, 'b2> for some 'b_i.
 /// Given a Choice2TeqEvaluator, it will invoke it with the type equality that it holds and will return the result.
 [<RequireQualifiedAccess>]
 module Choice2TeqCrate =
@@ -137,11 +137,11 @@ module Choice2TeqCrate =
     val make<'b1, 'b2> : unit -> Choice<'b1, 'b2> Choice2TeqCrate
 
     /// For any type 'a, checks to see if 'a is actually a Choice<'b1, 'b2> for some 'b_i.
-    /// If it is, creates the type equality eq<'a, Choice<'b1, 'b2>> and then wraps it in a crate.
+    /// If it is, creates the type equality Teq<'a, Choice<'b1, 'b2>> and then wraps it in a crate.
     /// Otherwise, returns None.
     val tryMake : unit -> 'a Choice2TeqCrate option
 
-/// The type of values that act on an SetTeqCrate.
+/// The type of values that act on a SetTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a 'b Set for any 'b and returns a value of type 'ret
 type SetTeqEvaluator<'a, 'ret> =
@@ -169,7 +169,7 @@ module SetTeqCrate =
     val tryMake : unit -> 'a SetTeqCrate option
 
 
-/// The type of values that act on an MapTeqCrate.
+/// The type of values that act on a MapTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a Map<'k, 'v> for any 'k, 'v and returns a value of type 'ret
 type MapTeqEvaluator<'a, 'ret> =
@@ -197,7 +197,7 @@ module MapTeqCrate =
     val tryMake : unit -> 'a MapTeqCrate option
 
 
-/// The type of values that act on an DictionaryTeqCrate.
+/// The type of values that act on a DictionaryTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a Dictionary<'k, 'v> for any 'k, 'v and returns a value of type 'ret
 type DictionaryTeqEvaluator<'a, 'ret> =
@@ -225,7 +225,7 @@ module DictionaryTeqCrate =
     val tryMake : unit -> 'a DictionaryTeqCrate option
 
 
-/// The type of values that act on an ResizeArrayTeqCrate.
+/// The type of values that act on a ResizeArrayTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and a 'b ResizeArray for any 'b and returns a value of type 'ret
 type ResizeArrayTeqEvaluator<'a, 'ret> =
@@ -253,7 +253,7 @@ module ResizeArrayTeqCrate =
     val tryMake : unit -> 'a ResizeArrayTeqCrate option
 
 
-/// The type of values that act on an FunTeqCrate.
+/// The type of values that act on a FunTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and the funtion type ('b -> 'c) for any 'b, 'c and returns a value of type 'ret
 type FunTeqEvaluator<'a, 'ret> =
@@ -281,7 +281,7 @@ module FunTeqCrate =
     val tryMake : unit -> 'a FunTeqCrate option
 
 
-/// The type of values that act on an PairTeqCrate.
+/// The type of values that act on a PairTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and the pair type 'b * 'c for any 'b, 'c and returns a value of type 'ret
 type PairTeqEvaluator<'a, 'ret> =
@@ -309,7 +309,7 @@ module PairTeqCrate =
     val tryMake : unit -> 'a PairTeqCrate option
 
 
-/// The type of values that act on an TripleTeqCrate.
+/// The type of values that act on a TripleTeqCrate.
 /// An encoding of a universally quantified function that takes a type equality between its
 /// first type parameter and the triple type 'b * 'c * 'd for any 'b, 'c, 'd and returns a value of type 'ret
 type TripleTeqEvaluator<'a, 'ret> =
