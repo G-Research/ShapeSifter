@@ -131,7 +131,6 @@ jobs:
       - run: echo "All required checks complete."
 
   # This does not gate release, because external dependencies may be flaky.
-  # Disabled while the repo is private
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
