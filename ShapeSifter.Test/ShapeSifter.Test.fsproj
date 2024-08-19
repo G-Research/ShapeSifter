@@ -20,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="ApiSurface" Version="4.0.40" />
     <PackageReference Include="FsUnit" Version="6.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.0-release-24373-02" />
     <PackageReference Include="NUnit" Version="4.1.0" />
   </ItemGroup>
 
