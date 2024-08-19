@@ -11,10 +11,12 @@ module TestSurface =
     [<Test>]
     let ``Ensure API surface has not been modified`` () = ApiSurface.assertIdentical assembly
 
+    (*
     [<Test>]
     [<Explicit "Run this explicitly to update the surface baseline">]
     let ``Update API surface`` () =
         ApiSurface.writeAssemblyBaseline assembly
+        *)
 
     [<Test>]
     let ``Ensure public API is fully documented`` () =
