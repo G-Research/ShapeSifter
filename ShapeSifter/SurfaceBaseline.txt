@@ -67,6 +67,7 @@ ShapeSifter.Patterns inherit obj
 ShapeSifter.Patterns+TType`1 inherit obj, implements 'a ShapeSifter.Patterns+TType System.IEquatable, System.Collections.IStructuralEquatable, 'a ShapeSifter.Patterns+TType System.IComparable, System.IComparable, System.Collections.IStructuralComparable - union type with 1 cases
 ShapeSifter.Patterns+TType`1.get_Item [method]: unit -> unit
 ShapeSifter.Patterns+TType`1.get_Tag [method]: unit -> int
+ShapeSifter.Patterns+TType`1.Equals [method]: ('a ShapeSifter.Patterns+TType, System.Collections.IEqualityComparer) -> bool
 ShapeSifter.Patterns+TType`1.Item [property]: [read-only] unit
 ShapeSifter.Patterns+TType`1.NewTType [static method]: unit -> 'a ShapeSifter.Patterns+TType
 ShapeSifter.Patterns+TType`1.Tag [property]: [read-only] int
