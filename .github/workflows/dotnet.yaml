@@ -125,9 +125,12 @@ jobs:
 
   all-required-checks-complete:
     needs: [check-format, build, expected-pack, analyze-code, github-tag-and-release-dry-run]
+    if: always()
     runs-on: ubuntu-latest
     steps:
-      - run: echo "All required checks complete."
+      - uses: G-Research/common-actions/check-required-lite@main
+        with:
+          needs-context: ${{ toJSON(needs) }}
 
   # This does not gate release, because external dependencies may be flaky.
   markdown-link-check:
@@ -141,13 +144,22 @@ jobs:
     if: ${{ !github.event.repository.fork && github.ref == 'refs/heads/main' }}
     needs: [all-required-checks-complete]
     environment: release
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
     steps:
       - name: Download NuGet artifact
         uses: actions/download-artifact@v4
         with:
           name: nuget-package
-      - name: Publish to NuGet
-        run: dotnet nuget push "ShapeSifter.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+          path: downloaded
+      - name: Publish NuGet package
+        uses: G-Research/common-actions/publish-nuget@main
+        with:
+          package-name: ShapeSifter
+          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          nupkg-dir: downloaded
 
   github-tag-and-release:
     runs-on: ubuntu-latest
