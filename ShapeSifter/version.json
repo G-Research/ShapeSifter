@@ -5,7 +5,7 @@
   ],
   "pathFilters": [
     ":/",
-    ":^ShapeSifter.Test/",
+    ":^/ShapeSifter.Test/",
     ":^/.github/",
     ":^/.config/",
     ":^/hooks/",
