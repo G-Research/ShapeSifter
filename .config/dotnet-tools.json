@@ -3,13 +3,13 @@
   "isRoot": true,
   "tools": {
     "fantomas": {
-      "version": "6.3.4",
+      "version": "6.3.16",
       "commands": [
         "fantomas"
       ]
     },
     "fsharp-analyzers": {
-      "version": "0.26.0",
+      "version": "0.28.0",
       "commands": [
         "fsharp-analyzers"
       ]
