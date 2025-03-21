@@ -11,7 +11,7 @@ open ShapeSifter.Patterns
 [<TestFixture>]
 module TestUnion =
 
-    [<AttributeUsage(AttributeTargets.Property, Inherited = true)>]
+    [<AttributeUsage(AttributeTargets.Method ||| AttributeTargets.Property, Inherited = true)>]
     type Foo () =
         inherit Attribute ()
 
