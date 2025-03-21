@@ -2,6 +2,7 @@ namespace ShapeSifter.Test
 
 open System
 
+open System.Reflection
 open NUnit.Framework
 open FsUnitTyped
 
@@ -45,20 +46,20 @@ module TestUnion =
 
         attributes.Count |> shouldEqual 4
 
-        attributes.["Case1"] |> shouldBeEmpty
+        attributes.["Case1"] |> Attribute.filterRuntime |> shouldBeEmpty
 
         attributes.["Case2"]
+        |> Attribute.filterRuntime
         |> List.exactlyOne
-        |> fun data -> data.AttributeType
         |> shouldEqual typeof<Foo>
 
         attributes.["Case3"]
+        |> Attribute.filterRuntime
         |> List.exactlyOne
-        |> fun data -> data.AttributeType
         |> shouldEqual typeof<Bar>
 
         attributes.["Case4"]
-        |> List.map (fun data -> data.AttributeType)
+        |> Attribute.filterRuntime
         |> List.sortBy (fun ty -> ty.Name)
         |> shouldEqual [ typeof<Bar> ; typeof<Foo> ]
 
@@ -86,9 +87,9 @@ module TestUnion =
             |> Map.ofList
 
         attributes.Count |> shouldEqual 2
-        attributes.["Field1"] |> shouldBeEmpty
+        attributes.["Field1"] |> Attribute.filterRuntime |> shouldBeEmpty
 
         attributes.["Field2"]
+        |> Attribute.filterRuntime
         |> List.exactlyOne
-        |> fun data -> data.AttributeType
         |> shouldEqual typeof<Foo>
