@@ -29,7 +29,7 @@ jobs:
       with:
         fetch-depth: 0 # so that NerdBank.GitVersioning has access to history
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{matrix.dotnet.sdk}}
     - name: Restore dependencies
@@ -45,7 +45,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Setup .NET SDK v8.0.x
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
       - name: Prepare .NET tools
@@ -61,7 +61,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup .NET SDK v8.0.x
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
       - name: Prepare .NET tools
@@ -85,7 +85,7 @@ jobs:
         with:
           fetch-depth: 0 # so that NerdBank.GitVersioning has access to history
       - name: Setup .NET SDK v8.0.x
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
       - name: Build
