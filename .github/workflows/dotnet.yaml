@@ -60,10 +60,10 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - name: Setup .NET SDK v8.0.x
+      - name: Setup .NET SDK v10.0.x
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 10.0.x
       - name: Prepare .NET tools
         run: dotnet tool restore
       - name: Prepare analyzers
@@ -71,7 +71,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ./ShapeSifter/ShapeSifter.fsproj
       - name: Run analyzers
-        run: dotnet fsharp-analyzers --project ./ShapeSifter/ShapeSifter.fsproj --analyzers-path ./.analyzerpackages/g-research.fsharp.analyzers/*/ --verbosity detailed --report ./analysis.sarif --treat-as-error GRA-STRING-001 GRA-STRING-002 GRA-STRING-003 GRA-UNIONCASE-001 GRA-INTERPOLATED-001 GRA-TYPE-ANNOTATE-001 GRA-VIRTUALCALL-001 GRA-IMMUTABLECOLLECTIONEQUALITY-001 GRA-JSONOPTS-001 GRA-LOGARGFUNCFULLAPP-001 GRA-DISPBEFOREASYNC-001 --exclude-analyzers PartialAppAnalyzer
+         run: dotnet fsharp-analyzers --project ./ShapeSifter/ShapeSifter.fsproj --analyzers-path ./.analyzerpackages/g-research.fsharp.analyzers/*/ --verbosity detailed --report ./analysis.sarif --treat-as-error "GRA-*" --exclude-analyzers PartialAppAnalyzer
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
         with:
