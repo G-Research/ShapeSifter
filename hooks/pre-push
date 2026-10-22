@@ -3,7 +3,7 @@
 import subprocess
 
 def check_fantomas():
-    result = subprocess.run(["dotnet", "fantomas", "--check", "."])
+    result = subprocess.run(["dotnet", "fantomas", "check", "."])
     if result.returncode != 0:
         raise Exception(f"Formatting incomplete (return code: {result.returncode}). Consider running `dotnet fantomas .`")
 
