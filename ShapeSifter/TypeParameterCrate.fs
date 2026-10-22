@@ -13,7 +13,7 @@ module TypeParameterCrate =
 
     let make<'a> =
         { new TypeParameterCrate with
-            member __.Apply e = e.Eval<'a> ()
+            member __.Apply e = e.Eval<'a>()
         }
 
     let makeUntyped (t : Type) =

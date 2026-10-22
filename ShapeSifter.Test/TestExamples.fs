@@ -113,7 +113,7 @@ module TestExamples =
 
                 let head =
                     match tType<'u> with
-                    | String teq -> (xs |> HList.head |> Teq.castTo teq).ToUpper () |> Teq.castFrom teq
+                    | String teq -> (xs |> HList.head |> Teq.castTo teq).ToUpper() |> Teq.castFrom teq
                     | _ -> xs |> HList.head
 
                 let tail = xs |> HList.tail |> shoutify

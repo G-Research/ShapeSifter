@@ -15,7 +15,7 @@ module Reflection =
             | Lambda (_, e) -> getMethodInfo e
             | _ -> failwith "Could not get MethodInfo"
 
-        let mi = (getMethodInfo e).GetGenericMethodDefinition ()
+        let mi = (getMethodInfo e).GetGenericMethodDefinition()
 
         fun ts vs ->
             mi.MakeGenericMethod (ts |> Array.ofSeq)
